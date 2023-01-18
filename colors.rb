@@ -1,27 +1,13 @@
 class Color
-  COLORS = {
-    BLACK: 16,
-    RED: 124,
-    GREEN: 28,
-    YELLOW: 142,
-    BLUE: 21,
-    MAGENTA: 99,
-    CYAN: 45,
-    WHITE: 111
-  }
+  attr_reader :name, :bg, :text
 
-  def self.c(color, mod = 48)
-    case mod
-    when 'text'
-      "\e[38;5;#{COLORS[color]}m"
-    else
-      "\e[48;5;#{COLORS[color]}m"
-    end
+  def initialize(name, col)
+    @name = name
+    @bg = "\e[48;5;#{col}m"
+    @text = "\e[38;5;#{col}m"
   end
 
-  def self.reset
+  def reset
     "\e[0m"
   end
 end
-
-puts "#{Color.c(:RED)} test #{Color.reset}"
