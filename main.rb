@@ -24,26 +24,24 @@
 ### store colors
 ### randomly select colors from list
 
-require_relative 'colors'
+require_relative 'color'
 require_relative 'display'
 require_relative 'code'
 
 # color setup
 COLOR_CODES = {
-  'BLACK' => 16,
-  'RED' => 124,
-  'GREEN' => 28,
-  'YELLOW' => 142,
-  'BLUE' => 21,
-  'MAGENTA' => 99,
-  'CYAN' => 45,
-  'WHITE' => 7
+  1 => 16, # black
+  2 => 124, # red
+  3 => 28, # green
+  4 => 142, # yellow
+  5 => 21, # blue
+  6 => 99, # magenta
+  7 => 45, # cyan
+  8 => 7 # white
 }
-COLORS = []
-COLOR_CODES.each do |name, code|
-  COLORS << Color.new(name, code)
-end
+COLORS = COLOR_CODES.map {|name, code| Color.new(name, code)}
 
 code = Code.new(COLORS)
 
 code.read
+code.check([2,2,3,2])

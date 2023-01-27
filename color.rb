@@ -1,8 +1,10 @@
-class Color
-  attr_reader :name, :bg, :text
+require_relative 'constants'
 
-  def initialize(name, col)
-    @name = name
+class Color
+  attr_reader :id, :bg, :text
+
+  def initialize(id, col)
+    @id = id
     @bg = "\e[48;5;#{col}m"
     @text = "\e[38;5;#{col}m"
   end
