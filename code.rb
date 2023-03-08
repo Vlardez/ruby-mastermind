@@ -8,7 +8,9 @@ class Code
   end
 
   def read
-    @color_code.each_with_index { |c, i| puts "#{c.bg} #{c.id}, #{i} #{Color.reset}" }
+    print 'The code is '
+    @color_code.each { |c| print "#{c.bg} #{c.id} #{Color.reset}" }
+    print "\n"
   end
 
   def check(player_code)

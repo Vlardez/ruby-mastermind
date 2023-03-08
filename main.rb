@@ -30,23 +30,26 @@ puts '### WELCOME TO MASTERMIND ###'
 puts "############################# \n"
 
 input = ''
-until [1, 2].include?(input)
-  puts 'Please select whether you would like to be the code-breaker(1) or the code-maker(2) - not yet implemented.'
-  input = gets.strip.to_i
-end
-
-exit if input == 2
-
-#  codebreaker mode
-if input == 1
-  code = Code.new(COLORS)
-  Display.color_reference
-  turns = 0
-
-  until turns >= 12
-    puts "you have #{12 - turns} turns left"
-    Display.color_reference
-    turns = code.check(Display.player_guess) ? 20 : turns+1
+until input == 'N'
+  until [1, 2].include?(input)
+    puts 'Please select whether you would like to be the code-breaker(1) or the code-maker(2) - not yet implemented.'
+    input = gets.strip.to_i
   end
+  exit if input == 2
 
+  #  codebreaker mode
+  if input == 1
+    code = Code.new(COLORS)
+    turns = 0
+
+    until turns >= 12
+      puts "you have #{12 - turns} turns left"
+      Display.color_reference
+      turns = code.check(Display.player_guess) ? 20 : turns+1
+    end
+
+    Display.result(turns)
+    code.read
+    input = Display.prompt('Would you like to play again? Y/N') until ['Y', 'N'].include?(input)
+  end
 end
