@@ -1,5 +1,5 @@
 require_relative 'constants'
-
+## class that contains and describes a 'Color'
 class Color
   attr_reader :id, :bg, :text
 
@@ -9,7 +9,7 @@ class Color
     @text = "\e[38;5;#{col}m"
   end
 
-  def reset
+  def self.reset
     "\e[0m"
   end
 end

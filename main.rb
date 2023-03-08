@@ -1,16 +1,5 @@
-# General outline pseudocode / brainstorm
-
 # keep main minimal
-
-# class division
-## player?
-## code
-## display
-## colors?
-
 ## player
-### get/clean input/guesses
-
 ## code
 ### generate code
 ### store code from player
@@ -19,11 +8,6 @@
 ## display
 ### display colors
 ### provide prompts
-
-## colors
-### store colors
-### randomly select colors from list
-
 require_relative 'color'
 require_relative 'display'
 require_relative 'code'
@@ -41,7 +25,28 @@ COLOR_CODES = {
 }
 COLORS = COLOR_CODES.map {|name, code| Color.new(name, code)}
 
-code = Code.new(COLORS)
+puts '#############################'
+puts '### WELCOME TO MASTERMIND ###'
+puts "############################# \n"
 
-code.read
-code.check([2,2,3,2])
+input = ''
+until [1, 2].include?(input)
+  puts 'Please select whether you would like to be the code-breaker(1) or the code-maker(2) - not yet implemented.'
+  input = gets.strip.to_i
+end
+
+exit if input == 2
+
+#  codebreaker mode
+if input == 1
+  code = Code.new(COLORS)
+  Display.color_reference
+  turns = 0
+
+  until turns >= 12
+    puts "you have #{12 - turns} turns left"
+    Display.color_reference
+    turns = code.check(Display.player_guess) ? 20 : turns+1
+  end
+
+end
