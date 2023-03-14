@@ -2,7 +2,6 @@
 class Display
   class << self
     def player_guess
-      puts 'Please try to guess the code. Enter in four single digits corresponding to the above color legend.'
       input = gets.strip.split('')
       input.map!(&:to_i)
       input.delete(0)
@@ -10,7 +9,7 @@ class Display
     end
 
     def prompt(prompt)
-      puts "#{prompt}"
+      puts prompt.to_s
       gets.strip.capitalize
     end
 
@@ -20,11 +19,15 @@ class Display
       puts "#{Color.reset} \n"
     end
 
+    def exit_message
+      puts "#{COLORS[3].text} Thank you for playing, have a nice day! #{Color.reset}"
+    end
+
     def result(winner)
       if winner == 20
-        puts 'congratulations, you won!'
+        puts "#{COLORS[6].text} Congratulations, you won! #{Color.reset}"
       else
-        puts 'Sorry, you ran out of time...'
+        puts "#{COLORS[1].text} Sorry, you ran out of time... #{Color.reset}"
       end
     end
   end
