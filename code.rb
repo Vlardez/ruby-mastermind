@@ -31,7 +31,7 @@ class Code
         colors[colors.find_index(c)] = 'x'
       end
     end
-    cor_pos_col.length.times { print CHECKMARK }
+    cor_pos_col.length.times { print "#{COLORS[5].text}#{PEG} #{Color.reset}" }
     cor_col.length.times { print "#{PEG} " }
     print "\n"
     cor_pos_col.length == 4

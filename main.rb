@@ -14,14 +14,12 @@ require_relative 'code'
 
 # color setup
 COLOR_CODES = {
-  1 => 16, # black
-  2 => 124, # red
-  3 => 28, # green
-  4 => 142, # yellow
-  5 => 21, # blue
-  6 => 99, # magenta
-  7 => 45, # cyan
-  8 => 7 # white
+  1 => 124, # red
+  2 => 28, # green
+  3 => 142, # yellow
+  4 => 21, # blue
+  5 => 99, # magenta
+  6 => 45 # cyan
 }
 COLORS = COLOR_CODES.map {|name, code| Color.new(name, code)}
 
@@ -46,11 +44,20 @@ until input == 'N'
       Display.color_reference
       turns = code.check(Display.player_guess) ? 20 : turns+1
     end
-
     Display.result(turns)
     code.read
-    input = Display.prompt('Would you like to play again? Y/N') until ['Y', 'N'].include?(input)
+    input = Display.end_prompt until ['Y', 'N'].include?(input)
   end
 
+  # codemaker mode
+  if input == 2
+    Display.color_reference
+    while 1 == 1 
+      code = Display.code_prompt
+      break if code.length == 4 && !code.include?(0)
+      puts 'Please ensure your code is only 4 nonzero digits. Any zeroes or other characters are not permitted.'
+    end
+  end
+  input = Display.end_prompt until ['Y', 'N'].include?(input)
 end
 Display.exit_message

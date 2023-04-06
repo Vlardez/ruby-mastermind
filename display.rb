@@ -8,8 +8,17 @@ class Display
       input
     end
 
-    def prompt(prompt)
-      puts prompt.to_s
+    def code_prompt
+      puts 'Please create a 4-digit code using the number references for the colors above.'
+      puts "(ex. 1 = #{COLORS[0].text}red.#{Color.reset}"
+      input = gets.strip.split('')
+      input.map!(&:to_i)
+      input.delete(0)
+      input
+    end
+
+    def end_prompt
+      puts 'Would you like to play again? Y/N'
       gets.strip.capitalize
     end
 
@@ -20,14 +29,14 @@ class Display
     end
 
     def exit_message
-      puts "#{COLORS[3].text} Thank you for playing, have a nice day! #{Color.reset}"
+      puts "#{COLORS[2].text}~~Thank you for playing, have a nice day!~~#{Color.reset}"
     end
 
     def result(winner)
       if winner == 20
-        puts "#{COLORS[6].text} Congratulations, you won! #{Color.reset}"
+        puts "#{COLORS[5].text} Congratulations, you won! #{Color.reset}"
       else
-        puts "#{COLORS[1].text} Sorry, you ran out of time... #{Color.reset}"
+        puts "#{COLORS[0].text} Sorry, you ran out of time... #{Color.reset}"
       end
     end
   end
