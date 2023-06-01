@@ -34,6 +34,6 @@ class Code
     cor_pos_col.length.times { print "#{COLORS[5].text}#{PEG} #{Color.reset}" }
     cor_col.length.times { print "#{PEG} " }
     print "\n"
-    cor_pos_col.length == 4
+    [cor_pos_col.length, cor_col.length]
   end
 end

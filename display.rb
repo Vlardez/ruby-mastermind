@@ -32,6 +32,7 @@ class Display
       puts "#{COLORS[2].text}~~Thank you for playing, have a nice day!~~#{Color.reset}"
     end
 
+
     def result(winner)
       if winner == 20
         puts "#{COLORS[5].text} Congratulations, you won! #{Color.reset}"

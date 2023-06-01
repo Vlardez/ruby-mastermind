@@ -11,22 +11,15 @@
 require_relative 'color'
 require_relative 'display'
 require_relative 'code'
+require_relative 'computer'
 
-# color setup
-COLOR_CODES = {
-  1 => 124, # red
-  2 => 28, # green
-  3 => 142, # yellow
-  4 => 21, # blue
-  5 => 99, # magenta
-  6 => 45 # cyan
-}
-COLORS = COLOR_CODES.map {|name, code| Color.new(name, code)}
+
 
 puts '#############################'
 puts '### WELCOME TO MASTERMIND ###'
 puts "############################# \n"
 
+invalid_nums = [7, 8, 9, 0]
 input = ''
 until input == 'N'
   until [1, 2].include?(input)
@@ -42,7 +35,9 @@ until input == 'N'
     until turns >= 12
       puts "you have #{12 - turns} turns left"
       Display.color_reference
-      turns = code.check(Display.player_guess) ? 20 : turns+1
+      ## need to errorcatch until 4 digits
+      result = code.check(Display.player_guess)
+      turns = result == [4,0] ? 20 : turns+1
     end
     Display.result(turns)
     code.read
@@ -52,12 +47,19 @@ until input == 'N'
   # codemaker mode
   if input == 2
     Display.color_reference
-    while 1 == 1 
+    loop do
       code = Display.code_prompt
-      break if code.length == 4 && !code.include?(0)
+      break if code.length == 4 && (code & invalid_nums).none? ## make sure to not include 7,8,9 either.
+
       puts 'Please ensure your code is only 4 nonzero digits. Any zeroes or other characters are not permitted.'
     end
+    solver = Computer.new(code)
+    if solver.try <= 12
+      puts 'Looks like the computer cracked your code! MAybe you\'ll have better luck next time ;)'
+    else
+      puts 'The computer couldn\'t crack the code! Don\'t know how you did it, but you beat them, congrats!!'
+    end
+    input = Display.end_prompt until ['Y', 'N'].include?(input)
   end
-  input = Display.end_prompt until ['Y', 'N'].include?(input)
 end
 Display.exit_message
