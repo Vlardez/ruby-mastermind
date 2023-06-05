@@ -23,7 +23,7 @@ invalid_nums = [7, 8, 9, 0]
 input = ''
 until input == 'N'
   until [1, 2].include?(input)
-    puts 'Please select whether you would like to be the code-breaker(1) or the code-maker(2) - not yet implemented.'
+    puts 'Please select whether you would like to be the code-breaker(1) or the code-maker(2)'
     input = gets.strip.to_i
   end
 
@@ -54,8 +54,8 @@ until input == 'N'
       puts 'Please ensure your code is only 4 nonzero digits. Any zeroes or other characters are not permitted.'
     end
     solver = Computer.new(code)
-    if solver.try <= 12
-      puts 'Looks like the computer cracked your code! MAybe you\'ll have better luck next time ;)'
+    if solver.try <= 13
+      puts 'Looks like the computer cracked your code! Maybe you\'ll have better luck next time ;)'
     else
       puts 'The computer couldn\'t crack the code! Don\'t know how you did it, but you beat them, congrats!!'
     end
