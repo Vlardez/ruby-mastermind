@@ -31,12 +31,18 @@ until input == 'N'
   if input == 1
     code = Code.new(COLORS)
     turns = 0
-    puts 'Please try to guess the code. Enter in four single digits corresponding to the above color legend.'
+    puts 'Please try to guess the code. Enter in four single digits corresponding to the below color legend.'
     until turns >= 12
       puts "you have #{12 - turns} turns left"
       Display.color_reference
       ## need to errorcatch until 4 digits
-      result = code.check(Display.player_guess)
+      loop do
+        input = Display.player_guess
+        break if input.length == 4 &&(code & invalid_nums).none?
+
+        puts 'Please ensure your code is only 4 nonzero digits. Any zeroes or other characters are not permitted.'
+      end
+      result = code.check(input)
       turns = result == [4,0] ? 20 : turns+1
     end
     Display.result(turns)
